@@ -1,0 +1,14 @@
+<?php
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Model;
+use Faker\Generator as Faker;
+
+$factory->define(App\Student::class, function (Faker $faker) {
+    return [
+        'firstname' => $faker->name,
+        'lastname' => $faker->name,
+        'birthday' => $faker->date
+    ];
+});
