@@ -7,10 +7,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import VueRouter from 'vue-router';
-
-//import Form from "./utilities/Form";//window.Form = Form;
-
 import router from './routes.js';
 
 /**
@@ -24,7 +20,11 @@ import router from './routes.js';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('Dashboard', require('./views/Dashboard.vue').default);
+Vue.component('Profile', require('./views/Profile.vue').default);
+
+Vue.component('Students', require('./views/Students.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
