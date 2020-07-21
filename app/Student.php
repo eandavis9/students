@@ -12,4 +12,9 @@ class Student extends Model
 
         return $this->hasMany('App\StudentData');
     }
+
+    public function sections(){
+
+        return $this->hasManyThrough('App\Section', 'App\Grade');
+    }
 }

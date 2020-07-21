@@ -3,82 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Student;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $students = \App\Student::orderBy('created_at', 'desc')->paginate(10);
+
+        return response()->json($students);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {   
+
+        $student = new \App\Student;
+
+        if($request->isMethod('PUT')){
+
+            $title = 'Added';
+            $student = \App\Student::findOrFail($request->get('student_id'));
+        }
+
+        $student->firstname = $request->get('firstname');
+        $student->lastname = $request->get('lastname');
+        $student->birthday = $request->get('birthday');
+
+        if($student->save()){
+
+            return response()->json($student);
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $student = \App\Student::findOrFail($id);
+       // ->leftjoin('student_data', 'student_data.student_id', '=', );
+        return response()->json($student->student_data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $student = Student::findOrFail($id);
+       // $student->delete();
+       //$this->authorize('delete', $student);
+
+       if(Auth::user()->can('delete')){
+        $student->delete();
+
+       // return response()->json($student);
+       }
+
+       return response()->json($student);
+
+        
     }
 }

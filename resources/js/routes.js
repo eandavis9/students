@@ -9,13 +9,25 @@ let routes = [
         component: require('./views/Dashboard.vue').default
     },
     {
-        path: '/users',
+        path: '/profile',
         component: require('./views/Profile.vue').default
     },
     {
         path: '/students',
         name : 'students',
         component: require('./views/Students.vue').default
+    },
+    {
+        path: '/students/:student',
+        name : 'edit_student',
+        props : true,
+        component: require('./components/students/Edit.vue').default
+    },
+    {
+
+        path : '/grades',
+        name : 'grades',
+        component : require('./views/Grades.vue').default
     }
 ];
 

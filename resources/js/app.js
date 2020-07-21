@@ -8,6 +8,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import router from './routes.js';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,6 +33,14 @@ Vue.component('Dashboard', require('./views/Dashboard.vue').default);
 Vue.component('Profile', require('./views/Profile.vue').default);
 
 Vue.component('Students', require('./views/Students.vue').default);
+Vue.component('StudentItems', require('./components/students/StudentItems.vue').default);
+Vue.component('AddStudent', require('./components/students/AddForm.vue').default);
+
+Vue.component('Grades', require('./views/Grades.vue').default);
+Vue.component('GradeItems', require('./components/grades/GradeItems.vue').default);
+
+Vue.component('AddGrade', require('./components/grades/AddForm.vue').default);
+Vue.component('AddSection', require('./components/grades/AddFormSection.vue').default);
 
 
 /**

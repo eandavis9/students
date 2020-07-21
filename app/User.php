@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isSuperAdmin(){
+
+        if(Auth::user()->type == 1){
+
+            return true;
+        }
+
+        return false;
+    }
 }

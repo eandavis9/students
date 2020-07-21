@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/{any}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
+//Route::get('/{any}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
 
 
 /*Route::get('/admin/', function () {
@@ -30,5 +30,24 @@ Route::get('/{any}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
 
 });*/
 
-Route::get('/users', 'UsersController@index');
-Route::post('/users', 'UsersController@create');
+Route::get('/user', 'UserController@index');
+Route::post('/user', 'UserController@create');
+
+Route::get('/get_students', 'StudentController@index')->name('get_students');
+Route::get('/get_students/{id}', 'StudentController@show');
+Route::post('/get_students', 'StudentController@create')->name('add_student');
+Route::delete('/get_students/{id}', 'StudentController@destroy')->name('delete_student');
+Route::put('/get_students', 'StudentController@create')->name('update_student');
+
+Route::get('/get_grades', 'GradeController@index')->name('get_grades');
+Route::post('/get_grades', 'GradeController@create')->name('add_grade');
+Route::delete('/get_grades/{id}', 'GradeController@destroy')->name('delete_grade');
+Route::put('/get_grades', 'GradeController@create')->name('update_grade');
+
+
+Route::post('/sections', 'SectionController@store')->name('add_section');
+
+
+
+//Route::get('/profile', 'UserController@index');
+//Route::put('/profile', 'UserController@update');
