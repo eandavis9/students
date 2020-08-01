@@ -17,8 +17,10 @@
         <div class="card">
         <div class="card-header">
         <h5 class="m-0">Student Data</h5>
+        <b-button class='btn btn-primary pull-right' v-b-modal.add_data_modal>Add Data</b-button>
+        <AddData v-bind:student='student'></AddData>
         </div>
-        <form>
+        <form @submit.prevent='update_data'>
         <div class="card-body" v-for='sd in student_data' v-bind:key='sd.id'>
             <StudentData v-bind:student_data='sd'></StudentData>
         </div>
@@ -50,7 +52,8 @@ export default {
 
         return {
             student : [],
-            student_data : []
+            student_data : [],
+            edit_data : []
         }
     },
 
@@ -65,7 +68,7 @@ export default {
 
         fetchStudentData(id){
 
-            axios.get(`/api/students/${id}`)
+            axios.get(`/get_students/${id}`)
             .then(res => {
 
               this.student_data = res.data;
@@ -82,6 +85,20 @@ export default {
               console.log(error)
             })
         },
+
+        update_data(){
+
+            
+           /* axios.put(`/student_data/${this.student.id}`,{
+
+                
+            })
+            .then(res => {
+
+                console.log(res)
+            })*/
+            
+        }
     }
     
 

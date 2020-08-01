@@ -2,7 +2,7 @@
    <div class='container'>
        <AddGrade></AddGrade>
 
-       <AddSection v-bind:grades='grades'></AddSection>
+       <AddSection v-bind:grades='allGrades'></AddSection>
 <div class="card">
     <div class="card-header">
     <h3 class="card-title">Grades</h3>
@@ -21,7 +21,7 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody v-for='grade in grades' v-bind:key='grade.id'>
+        <tbody v-for='grade in allGrades' v-bind:key='grade.id'>
             <GradeItems v-bind:grade='grade'> </GradeItems>
         </tbody>
     </table>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
+
 export default {
     
     name : 'Grade',
@@ -40,17 +42,19 @@ export default {
         return {
 
 
-            grades : []
+          //  grades : []
         }
     },
 
-    created (){
+    computed : mapGetters(['allGrades']),
 
+    created (){
         this.fetchGrades();
     },
     methods : {
 
-        fetchGrades(){
+        ...mapActions(['fetchGrades'])
+       /* fetchGrades(){
 
             axios.get('/get_grades')
             .then(res => {
@@ -62,7 +66,7 @@ export default {
 
                 console.log(error)
             })
-        }
+        }*/
     }
 }
 </script>

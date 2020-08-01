@@ -19,9 +19,14 @@ class SectionController extends Controller
        // $this->middleware('auth');
      }
 
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {   
+        $grade = \App\Grade::findOrFail($request->get('grade_id'));
+
+        return response()->json($grade->sections);
+       // $grade_id = $request->get('grade_id');
+
+
     }
 
     /**

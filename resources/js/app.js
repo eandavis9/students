@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import router from './routes.js';
+import store from './store/index.js';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Install BootstrapVue
@@ -43,6 +44,23 @@ Vue.component('AddGrade', require('./components/grades/AddForm.vue').default);
 Vue.component('AddSection', require('./components/grades/AddFormSection.vue').default);
 
 
+Vue.component('AddData', require('./components/student_data/AddForm.vue').default);
+
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51,5 +69,6 @@ Vue.component('AddSection', require('./components/grades/AddFormSection.vue').de
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

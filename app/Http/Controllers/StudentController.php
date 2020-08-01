@@ -46,8 +46,9 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = \App\Student::findOrFail($id);
+        
        // ->leftjoin('student_data', 'student_data.student_id', '=', );
-        return response()->json($student->student_data);
+        return response()->json($student->student_data($id));
     }
 
     public function destroy($id)

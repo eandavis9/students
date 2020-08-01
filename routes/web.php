@@ -11,6 +11,8 @@
 |
 */
 
+
+//dd(TestingFacade::get());
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -46,6 +48,13 @@ Route::put('/get_grades', 'GradeController@create')->name('update_grade');
 
 
 Route::post('/sections', 'SectionController@store')->name('add_section');
+Route::get('/get_sections', 'SectionController@index')->name('get_section');
+
+
+Route::post('/student_data', 'StudentDataController@store')->name('add_data');
+
+Route::delete('/student_data/{id}', 'StudentDataController@destroy')->name('delete_data');
+Route::put('/student_data/{id}', 'StudentDataController@update')->name('update_data');
 
 
 

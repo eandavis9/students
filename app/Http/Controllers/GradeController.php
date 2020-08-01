@@ -13,6 +13,11 @@ class GradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $grades = Grade::orderBy('grade_name','asc')->paginate(10);
